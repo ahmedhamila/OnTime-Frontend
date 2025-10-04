@@ -42,8 +42,10 @@ export function ClockFlow({ type }: ClockFlowProps) {
 					? (error as any).response?.data?.errors?.[0]?.detail
 					: null
 			setErrorMessage(
-				detailedError || `Failed to clock ${type === "in" ? "in" : "out"}`
+				detailedError ||
+					`Échec du pointage ${type === "in" ? "entrée" : "sortie"}`
 			)
+
 			setCurrentStep(6) // Navigate to error step
 		}
 	})
@@ -137,7 +139,7 @@ export function ClockFlow({ type }: ClockFlowProps) {
 					)}
 				</div>
 			</div>
-			<div className="fixed bottom-6 right-6 z-10">
+			<div className="fixed top-[75px] left-1 z-10">
 				<Button
 					variant="outline"
 					size="lg"
@@ -145,7 +147,7 @@ export function ClockFlow({ type }: ClockFlowProps) {
 					className="gap-2 bg-background shadow-lg border-2"
 				>
 					<Home className="w-5 h-5" />
-					Home
+					Accueil
 				</Button>
 			</div>
 		</div>

@@ -11,7 +11,7 @@ export const useEmployeeByPin = () => {
 			const errorMessage =
 				error instanceof Error && "response" in error
 					? (error as any).response?.data?.errors?.[0]?.detail
-					: "Employee not found with this PIN"
+					: "Aucun employé trouvé avec ce code PIN"
 			toast.error(errorMessage)
 		}
 	})

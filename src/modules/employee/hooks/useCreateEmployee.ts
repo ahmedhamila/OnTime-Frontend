@@ -12,13 +12,13 @@ export const useCreateEmployee = () => {
 			EmployeeService.createEmployee(employeeData),
 		onSuccess: (newEmployee) => {
 			queryClient.invalidateQueries({ queryKey: ["employees"] })
-			toast.success("Employee added successfully")
+			toast.success("Employé ajouté avec succès")
 		},
 		onError: (error) => {
 			const errorMessage =
 				error instanceof Error && "response" in error
 					? (error as any).response?.data?.errors[0]?.detail
-					: "Failed to add Employee"
+					: "Échec de l'ajout de l'employé"
 			toast.error(errorMessage)
 		}
 	})

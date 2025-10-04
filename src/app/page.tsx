@@ -21,7 +21,7 @@ export default function HomePage() {
 							OnTime
 						</h1>
 						<p className="text-muted-foreground text-balance">
-							Select an option to continue
+							Sélectionnez une option pour continuer
 						</p>
 					</div>
 
@@ -36,10 +36,10 @@ export default function HomePage() {
 									</div>
 									<div className="flex-1">
 										<h2 className="text-xl font-semibold mb-1 group-hover:text-[var(--clock-in)] transition-colors">
-											Clock In
+											Pointer l’entrée
 										</h2>
 										<p className="text-sm text-muted-foreground">
-											Start your work shift
+											Commencer votre poste de travail
 										</p>
 									</div>
 								</div>
@@ -55,10 +55,10 @@ export default function HomePage() {
 									</div>
 									<div className="flex-1">
 										<h2 className="text-xl font-semibold mb-1 group-hover:text-[var(--clock-out)] transition-colors">
-											Clock Out
+											Pointer la sortie
 										</h2>
 										<p className="text-sm text-muted-foreground">
-											End your work shift
+											Terminer votre poste de travail
 										</p>
 									</div>
 								</div>
@@ -68,7 +68,7 @@ export default function HomePage() {
 
 					{/* Footer */}
 					<div className="text-center text-sm text-muted-foreground pt-4">
-						<p>Need help? Contact your supervisor</p>
+						<p>Besoin d&apos;aide ? Contactez votre superviseur</p>
 					</div>
 				</div>
 			</div>

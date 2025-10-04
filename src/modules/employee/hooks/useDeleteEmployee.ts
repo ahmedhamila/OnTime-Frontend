@@ -10,13 +10,13 @@ export const useDeleteEmployee = () => {
 		mutationFn: (id: number) => EmployeeService.deleteEmployee(id),
 		onSuccess: () => {
 			queryClient.invalidateQueries({ queryKey: ["employees"] })
-			toast.success("Employé deleted successfully")
+			toast.success("Employé supprimé avec succès")
 		},
 		onError: (error) => {
 			const errorMessage =
 				error instanceof Error && "response" in error
 					? (error as any).response?.data?.errors[0]?.detail
-					: "Failed to delete Employé"
+					: "Échec de la suppression de l'employé"
 			toast.error(errorMessage)
 		}
 	})

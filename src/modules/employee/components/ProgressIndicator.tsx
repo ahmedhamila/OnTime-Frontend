@@ -21,7 +21,7 @@ export function ProgressIndicator({
 				<div className="max-w-md mx-auto px-4 py-4">
 					<div className="flex items-center justify-between mb-2">
 						<span className="text-sm font-medium text-foreground">
-							Step {currentStep} of {totalSteps}
+							Étape {currentStep} sur {totalSteps}
 						</span>
 						<span className="text-sm text-muted-foreground">
 							{Math.round(percentage)}%

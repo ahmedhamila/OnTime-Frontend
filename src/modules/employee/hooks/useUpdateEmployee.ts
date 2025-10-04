@@ -12,13 +12,14 @@ export const useUpdateEmployee = () => {
 			EmployeeService.updateEmployee(id, employeeData),
 		onSuccess: (updatedEmployee) => {
 			queryClient.invalidateQueries({ queryKey: ["employees"] })
-			toast.success("Employee updated successfully")
+			toast.success("Employé mis à jour avec succès")
 		},
 		onError: (error) => {
 			const errorMessage =
 				error instanceof Error && "response" in error
 					? (error as any).response?.data?.errors[0]?.detail
-					: "Failed to update Employee"
+					: "Échec de la mise à jour de l'employé"
+
 			toast.error(errorMessage)
 		}
 	})

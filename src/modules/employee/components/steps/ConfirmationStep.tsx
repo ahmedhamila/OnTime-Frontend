@@ -39,8 +39,10 @@ export function ConfirmationStep({
 						/>
 					</div>
 				</div>
-				<h1 className="text-2xl font-bold text-balance">Confirm Identity</h1>
-				<p className="text-muted-foreground text-balance">Is this you?</p>
+				<h1 className="text-2xl font-bold text-balance">
+					Confirmer l&apos;identité
+				</h1>
+				<p className="text-muted-foreground text-balance">Est-ce vous ?</p>
 			</div>
 
 			{/* Employee Info */}
@@ -56,7 +58,7 @@ export function ConfirmationStep({
 					</div>
 					<div>
 						<h2 className="text-2xl font-bold mb-1">{employeeName}</h2>
-						<p className="text-muted-foreground">Employee</p>
+						<p className="text-muted-foreground">Employé</p>
 					</div>
 				</div>
 			</Card>
@@ -77,7 +79,7 @@ export function ConfirmationStep({
 					}}
 					onClick={onConfirm}
 				>
-					Yes, that&apos;s me
+					Oui, c&apos;est moi
 				</Button>
 				<Button
 					variant="outline"
@@ -86,7 +88,7 @@ export function ConfirmationStep({
 					onClick={onBack}
 				>
 					<ArrowLeft className="w-5 h-5 mr-2" />
-					Go Back
+					Retour
 				</Button>
 			</div>
 		</div>

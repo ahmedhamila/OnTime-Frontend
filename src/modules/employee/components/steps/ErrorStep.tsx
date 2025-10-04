@@ -17,11 +17,11 @@ export function ErrorStep({ type, errorMessage }: ErrorStepProps) {
 
 			<div className="space-y-2">
 				<h2 className="text-2xl font-bold text-foreground">
-					Clock {type === "in" ? "In" : "Out"} Failed
+					Échec du pointage {type === "in" ? "entrée" : "sortie"}
 				</h2>
 				<p className="text-muted-foreground">
 					{errorMessage ||
-						"Something went wrong while processing your request."}
+						"Une erreur est survenue lors du traitement de votre demande."}
 				</p>
 			</div>
 		</div>

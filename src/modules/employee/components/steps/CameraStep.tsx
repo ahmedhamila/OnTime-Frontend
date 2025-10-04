@@ -7,6 +7,7 @@ import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 import { ArrowLeft, Camera, RotateCcw } from "lucide-react"
+import { toast } from "sonner"
 
 interface CameraStepProps {
 	type: "in" | "out"
@@ -44,7 +45,10 @@ export function CameraStep({ type, onCapture, onBack }: CameraStepProps) {
 
 	const handleUserMediaError = (error: string | DOMException) => {
 		console.error("Camera error:", error)
-		alert("Camera access denied. Please enable camera permissions.")
+		toast.error(
+			"Accès à la caméra refusé. Veuillez activer les autorisations de la caméra."
+		)
+
 		setCameraStarted(false)
 	}
 
@@ -59,9 +63,9 @@ export function CameraStep({ type, onCapture, onBack }: CameraStepProps) {
 						<Camera className="w-8 h-8 text-white" />
 					</div>
 				</div>
-				<h1 className="text-2xl font-bold text-balance">Take a Selfie</h1>
+				<h1 className="text-2xl font-bold text-balance">Prenez un selfie</h1>
 				<p className="text-muted-foreground text-balance">
-					We need to verify your identity
+					Nous devons vérifier votre identité
 				</p>
 			</div>
 
@@ -73,7 +77,7 @@ export function CameraStep({ type, onCapture, onBack }: CameraStepProps) {
 							<div className="text-center space-y-3">
 								<Camera className="w-16 h-16 text-muted-foreground mx-auto" />
 								<p className="text-sm text-muted-foreground">
-									Camera not started
+									Caméra non démarrée
 								</p>
 							</div>
 						</div>
@@ -117,7 +121,7 @@ export function CameraStep({ type, onCapture, onBack }: CameraStepProps) {
 							onClick={startCamera}
 						>
 							<Camera className="w-5 h-5 mr-2" />
-							Start Camera
+							Démarrer la caméra
 						</Button>
 						<Button
 							variant="outline"
@@ -126,7 +130,7 @@ export function CameraStep({ type, onCapture, onBack }: CameraStepProps) {
 							onClick={onBack}
 						>
 							<ArrowLeft className="w-5 h-5 mr-2" />
-							Go Back
+							Retour
 						</Button>
 					</>
 				)}
@@ -143,7 +147,7 @@ export function CameraStep({ type, onCapture, onBack }: CameraStepProps) {
 							onClick={capturePhoto}
 						>
 							<Camera className="w-5 h-5 mr-2" />
-							Capture Photo
+							Prendre la photo
 						</Button>
 						<Button
 							variant="outline"
@@ -151,7 +155,7 @@ export function CameraStep({ type, onCapture, onBack }: CameraStepProps) {
 							className="w-full h-14 border-2 bg-transparent"
 							onClick={() => setCameraStarted(false)}
 						>
-							Cancel
+							Annuler
 						</Button>
 					</>
 				)}
@@ -167,7 +171,7 @@ export function CameraStep({ type, onCapture, onBack }: CameraStepProps) {
 							}`}
 							onClick={confirmPhoto}
 						>
-							Confirm Photo
+							Confirmer la photo
 						</Button>
 						<Button
 							variant="outline"
@@ -176,7 +180,7 @@ export function CameraStep({ type, onCapture, onBack }: CameraStepProps) {
 							onClick={retakePhoto}
 						>
 							<RotateCcw className="w-5 h-5 mr-2" />
-							Retake Photo
+							Reprendre la photo
 						</Button>
 					</>
 				)}

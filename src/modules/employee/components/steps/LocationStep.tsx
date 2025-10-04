@@ -39,7 +39,7 @@ export function LocationStep({ type, onCapture, onBack }: LocationStepProps) {
 					// Warn if accuracy is poor (optional but recommended)
 					if (position.coords.accuracy > 100) {
 						setError(
-							`Location acquired but accuracy is low (${Math.round(position.coords.accuracy)}m). Please ensure GPS is enabled.`
+							`Position acquise mais précision faible (${Math.round(position.coords.accuracy)}m). Veuillez vous assurer que le GPS est activé.`
 						)
 					}
 
@@ -53,16 +53,18 @@ export function LocationStep({ type, onCapture, onBack }: LocationStepProps) {
 					console.error("[Geolocation error]:", err)
 
 					// Better error messages
-					let errorMessage = "Unable to get location. "
+					let errorMessage = "Impossible d'obtenir la position. "
 					switch (err.code) {
 						case err.PERMISSION_DENIED:
-							errorMessage += "Please enable location permissions."
+							errorMessage +=
+								"Veuillez activer les autorisations de localisation."
 							break
 						case err.POSITION_UNAVAILABLE:
-							errorMessage += "Location unavailable. Ensure GPS is enabled."
+							errorMessage +=
+								"Position indisponible. Assurez-vous que le GPS est activé."
 							break
 						case err.TIMEOUT:
-							errorMessage += "Request timed out. Please try again."
+							errorMessage += "La requête a expiré. Veuillez réessayer."
 							break
 					}
 
@@ -73,7 +75,7 @@ export function LocationStep({ type, onCapture, onBack }: LocationStepProps) {
 			)
 		} else {
 			setLoading(false)
-			setError("Geolocation not supported on this device.")
+			setError("La géolocalisation n'est pas prise en charge sur cet appareil.")
 		}
 	}
 
@@ -97,9 +99,11 @@ export function LocationStep({ type, onCapture, onBack }: LocationStepProps) {
 						/>
 					</div>
 				</div>
-				<h1 className="text-2xl font-bold text-balance">Verify Location</h1>
+				<h1 className="text-2xl font-bold text-balance">
+					Vérifier la position
+				</h1>
 				<p className="text-muted-foreground text-balance">
-					We need to confirm your location
+					Nous devons confirmer votre position
 				</p>
 			</div>
 
@@ -109,10 +113,13 @@ export function LocationStep({ type, onCapture, onBack }: LocationStepProps) {
 					<div className="flex items-start gap-3">
 						<MapPin className="w-5 h-5 text-muted-foreground mt-0.5 flex-shrink-0" />
 						<div>
-							<h3 className="font-semibold mb-1">Why we need this</h3>
+							<h3 className="font-semibold mb-1">
+								Pourquoi nous avons besoin de cela
+							</h3>
 							<p className="text-sm text-muted-foreground leading-relaxed">
-								Your location helps verify you&apos;re clocking{" "}
-								{type === "in" ? "in" : "out"} from an authorized work site.
+								Votre position aide à vérifier que vous pointez{" "}
+								{type === "in" ? "entrée" : "sortie"} depuis un site de travail
+								autorisé.
 							</p>
 						</div>
 					</div>
@@ -145,10 +152,10 @@ export function LocationStep({ type, onCapture, onBack }: LocationStepProps) {
 					{loading ? (
 						<>
 							<Loader2 className="w-5 h-5 mr-2 animate-spin" />
-							Getting Location...
+							Obtention de la position...
 						</>
 					) : (
-						"Allow Location Access"
+						"Autoriser l’accès à la position"
 					)}
 				</Button>
 				<Button
@@ -159,7 +166,7 @@ export function LocationStep({ type, onCapture, onBack }: LocationStepProps) {
 					disabled={loading}
 				>
 					<ArrowLeft className="w-5 h-5 mr-2" />
-					Go Back
+					Retour
 				</Button>
 			</div>
 		</div>

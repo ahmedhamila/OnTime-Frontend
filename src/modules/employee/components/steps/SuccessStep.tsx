@@ -54,17 +54,17 @@ export function SuccessStep({ type, employeeName }: SuccessStepProps) {
 			<Card className="p-6">
 				<div className="space-y-4">
 					<div className="flex items-center justify-between pb-4 border-b border-border">
-						<span className="text-muted-foreground">Employee</span>
+						<span className="text-muted-foreground">Employé</span>
 						<span className="font-semibold">{employeeName}</span>
 					</div>
 					<div className="flex items-center justify-between pb-4 border-b border-border">
 						<span className="text-muted-foreground">Action</span>
 						<span className="font-semibold" style={{ color: themeColor }}>
-							Clock {type === "in" ? "In" : "Out"}
+							Pointage {type === "in" ? "Entrée" : "Sortie"}
 						</span>
 					</div>
 					<div className="flex items-start justify-between">
-						<span className="text-muted-foreground">Time</span>
+						<span className="text-muted-foreground">Heure</span>
 						<div className="text-right">
 							<div className="font-semibold flex items-center gap-2">
 								<Clock className="w-4 h-4" />

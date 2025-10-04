@@ -64,10 +64,12 @@ export function PinStep({ type, onSubmit, isLoading = false }: PinStepProps) {
 					</div>
 				</div>
 				<h1 className="text-2xl font-bold text-balance">
-					Clock {type === "in" ? "In" : "Out"}
+					Pointage {type === "in" ? "Entrée" : "Sortie"}
 				</h1>
 				<p className="text-muted-foreground text-balance">
-					{isLoading ? "Verifying PIN..." : "Enter your 4-digit PIN"}
+					{isLoading
+						? "Vérification du code PIN..."
+						: "Entrez votre code PIN à 4 chiffres"}
 				</p>
 			</div>
 
