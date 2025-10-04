@@ -68,13 +68,15 @@ export function SuccessStep({ type, employeeName }: SuccessStepProps) {
 						<div className="text-right">
 							<div className="font-semibold flex items-center gap-2">
 								<Clock className="w-4 h-4" />
-								{new Date().toLocaleTimeString("en-US", {
+								{new Date().toLocaleTimeString("fr-FR", {
+									timeZone: "Europe/Paris",
 									hour: "2-digit",
 									minute: "2-digit"
 								})}
 							</div>
 							<div className="text-sm text-muted-foreground mt-1">
-								{new Date().toLocaleDateString("en-US", {
+								{new Date().toLocaleDateString("fr-FR", {
+									timeZone: "Europe/Paris",
 									month: "short",
 									day: "numeric",
 									year: "numeric"

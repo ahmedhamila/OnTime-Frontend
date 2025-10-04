@@ -1,10 +1,7 @@
-import type { Metadata } from "next"
+import { redirect } from "next/navigation"
 
-
-export const metadata: Metadata = {
-	title: "Dashboard - OnTime"
+export default async function Home() {
+	redirect("/dashboard/clocks")
 }
 
-export default function Dashboard() {
-	return <h1>aaa</h1>
-}
+export const dynamic = "force-dynamic"

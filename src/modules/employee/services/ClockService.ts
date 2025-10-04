@@ -1,4 +1,4 @@
-import { apiPublic } from "@/helpers/apiHelpers"
+import { apiAdmin, apiPublic } from "@/helpers/apiHelpers"
 
 import type { ClockFormData } from "../schemas/clock"
 import type { Clock } from "../types/clock"
@@ -23,7 +23,7 @@ const base64ToFile = (base64String: string, filename: string): File => {
 
 export const ClockService = {
 	getClocks: async (): Promise<Clock[]> => {
-		const response = await apiPublic.get("/api/employees/clock-records/")
+		const response = await apiAdmin.get("/api/employees/clock-records/")
 		return response.data
 	},
 
@@ -40,11 +40,15 @@ export const ClockService = {
 			)
 			formData.append("photo", photoFile)
 		}
-		const response = await apiPublic.post("/api/employees/clock-records/", formData, {
-			headers: {
-				"Content-Type": "multipart/form-data"
+		const response = await apiPublic.post(
+			"/api/employees/clock-records/",
+			formData,
+			{
+				headers: {
+					"Content-Type": "multipart/form-data"
+				}
 			}
-		})
+		)
 		return response.data
 	},
 

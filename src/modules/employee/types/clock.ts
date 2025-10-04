@@ -1,7 +1,9 @@
+import { Employee } from "./employee"
+
 export interface Clock {
 	id: number
 	clockType: "in" | "out"
-	employee: number
+	employee: Employee
 	pinCode: string
 	locationLat: number
 	locationLng: number
