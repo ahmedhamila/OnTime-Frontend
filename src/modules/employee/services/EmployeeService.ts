@@ -1,16 +1,16 @@
-import { api } from "@/helpers/apiHelpers"
+import { apiAdmin, apiPublic } from "@/helpers/apiHelpers"
 
 import { EmployeeFormData } from "../schemas/employee"
 import { Employee } from "../types/employee"
 
 export const EmployeeService = {
 	getEmployees: async (): Promise<Employee[]> => {
-		const response = await api.get("/api/employees/employees/")
+		const response = await apiAdmin.get("/api/employees/employees/")
 		return response.data
 	},
 
 	createEmployee: async (employeeData: EmployeeFormData): Promise<Employee> => {
-		const response = await api.post("/api/employees/employees/", employeeData)
+		const response = await apiAdmin.post("/api/employees/employees/", employeeData)
 		return response.data
 	},
 
@@ -18,7 +18,7 @@ export const EmployeeService = {
 		id: number,
 		employeeData: EmployeeFormData
 	): Promise<Employee> => {
-		const response = await api.put(
+		const response = await apiAdmin.put(
 			`/api/employees/employees/${id}/`,
 			employeeData
 		)
@@ -26,6 +26,12 @@ export const EmployeeService = {
 	},
 
 	deleteEmployee: async (id: number): Promise<void> => {
-		await api.delete(`/api/employees/employees/${id}/`)
+		await apiAdmin.delete(`/api/employees/employees/${id}/`)
+	},
+	getEmployeeByPin: async (pinCode: string): Promise<Employee> => {
+		const response = await apiPublic.post("/api/employees/employees/by-pin/", {
+			pinCode
+		})
+		return response.data
 	}
 }

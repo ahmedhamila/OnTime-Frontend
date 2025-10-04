@@ -18,7 +18,7 @@ import { AddEmployeeDialog } from "@/modules/employee/components/AddEmployeeDial
 import { UpdateEmployeeDialog } from "@/modules/employee/components/UpdateEmployeeDialog"
 import { useBulkDeleteEmployees } from "@/modules/employee/hooks/useBulkDeleteEmployees"
 import { useDeleteEmployee } from "@/modules/employee/hooks/useDeleteEmployee"
-import { useEmployees } from "@/modules/employee/hooks/useEmployee"
+import { useEmployees } from "@/modules/employee/hooks/useEmployees"
 import { Employee } from "@/modules/employee/types/employee"
 import type { ColumnDef } from "@tanstack/react-table"
 import { Edit, KeyRound, MoreHorizontal, Phone, Trash2 } from "lucide-react"

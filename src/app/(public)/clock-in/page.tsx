@@ -1,3 +1,7 @@
+"use client"
+
+import { ClockFlow } from "@/modules/employee/components/ClockFlow"
+
 export default function ClockInPage() {
-	return <h1>Clock in</h1>
+	return <ClockFlow type="in" />
 }

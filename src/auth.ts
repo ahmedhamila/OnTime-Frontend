@@ -1,7 +1,7 @@
 import { getServerSession, type AuthOptions } from "next-auth"
 import CredentialsProvider from "next-auth/providers/credentials"
 
-import { api } from "./helpers/apiHelpers"
+import { apiAdmin } from "./helpers/apiHelpers"
 
 export const authOptions: AuthOptions = {
 	providers: [
@@ -20,7 +20,7 @@ export const authOptions: AuthOptions = {
 				}
 
 				try {
-					const response = await api.post("/api/users/login-email/", {
+					const response = await apiAdmin.post("/api/users/login-email/", {
 						email: credentials.email,
 						password: credentials.password
 					})

@@ -1,3 +1,7 @@
+"use client"
+
+import { ClockFlow } from "@/modules/employee/components/ClockFlow"
+
 export default function ClockOutPage() {
-	return <h1>Clock out</h1>
+	return <ClockFlow type="out" />
 }
