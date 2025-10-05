@@ -43,22 +43,22 @@ function AdminClocksPage() {
 		})
 	}, [clocks, todayStart, todayEnd])
 
-	// Calculate currently active employees (clocked in)
+	// Calculate currently active employees (clocked in today but not clocked out)
 	const currentlyActive = useMemo(() => {
-		if (!clocks || !employees) return []
+		if (!todayClocks || !employees) return []
 
 		const employeeStatusMap = new Map<
 			number,
 			{ employee: Clock["employee"]; lastClock: Clock }
 		>()
 
-		// Sort clocks by timestamp descending to get latest first
-		const sortedClocks = [...clocks].sort(
+		// Sort today's clocks by timestamp descending
+		const sortedClocks = [...todayClocks].sort(
 			(a, b) =>
 				new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime()
 		)
 
-		// For each employee, find their latest clock
+		// For each employee, get their latest clock today
 		sortedClocks.forEach((clock) => {
 			if (!employeeStatusMap.has(clock.employee.id)) {
 				employeeStatusMap.set(clock.employee.id, {
@@ -68,11 +68,11 @@ function AdminClocksPage() {
 			}
 		})
 
-		// Filter only those whose last clock was "in"
+		// Filter only those whose last clock *today* was "in"
 		return Array.from(employeeStatusMap.values())
 			.filter(({ lastClock }) => lastClock.clockType === "in")
 			.map(({ employee, lastClock }) => ({ employee, lastClock }))
-	}, [clocks, employees])
+	}, [todayClocks, employees])
 
 	// Statistics
 	const stats = useMemo(() => {

@@ -2,7 +2,6 @@
 
 import React from "react"
 
-import { Logo } from "@/components/shared/Logo"
 import {
 	Sidebar,
 	SidebarContent,
@@ -29,9 +28,7 @@ export function AppSidebar({
 
 	return (
 		<Sidebar collapsible="icon" {...props}>
-			<SidebarHeader className="p-3">
-				<Logo isCollapsed={isCollapsed} />
-			</SidebarHeader>
+			<SidebarHeader className="p-3"></SidebarHeader>
 			<SidebarContent className="pt-10">
 				<NavMain items={navItems} />
 			</SidebarContent>

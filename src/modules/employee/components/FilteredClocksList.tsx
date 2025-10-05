@@ -1,12 +1,19 @@
 "use client"
 
 import { useMemo, useState } from "react"
+import Image from "next/image"
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Calendar } from "@/components/ui/calendar"
 import { Card } from "@/components/ui/card"
+import {
+	Dialog,
+	DialogContent,
+	DialogHeader,
+	DialogTitle
+} from "@/components/ui/dialog"
 import {
 	Popover,
 	PopoverContent,
@@ -31,6 +38,7 @@ import {
 	ClockIcon,
 	ExternalLink,
 	Filter,
+	ImageIcon,
 	MapPin
 } from "lucide-react"
 
@@ -45,6 +53,15 @@ export function FilteredClocksList({
 }: FilteredClocksListProps) {
 	const [selectedDate, setSelectedDate] = useState<Date>(new Date())
 	const [selectedEmployeeId, setSelectedEmployeeId] = useState<string>("all")
+	const [photoDialog, setPhotoDialog] = useState<{
+		open: boolean
+		photo: string
+		name: string
+	}>({
+		open: false,
+		photo: "",
+		name: ""
+	})
 
 	// Filter clocks by selected date
 	const filteredClocks = useMemo(() => {
@@ -320,22 +337,41 @@ export function FilteredClocksList({
 												</div>
 											</div>
 
-											<Button
-												variant="outline"
-												size="sm"
-												className="w-full sm:w-auto shrink-0 bg-transparent"
-												asChild
-											>
-												<a
-													href={mapsUrl}
-													target="_blank"
-													rel="noopener noreferrer"
+											{/* Button group for photo and map actions */}
+											<div className="flex gap-2 w-full sm:w-auto">
+												<Button
+													variant="outline"
+													size="sm"
+													className="flex-1 sm:flex-initial shrink-0 bg-transparent"
+													onClick={() => {
+														setPhotoDialog({
+															open: true,
+															photo: clock.photo,
+															name: `${clock.employee.firstName} ${clock.employee.lastName}`
+														})
+													}}
 												>
-													<MapPin className="h-3 w-3 mr-1" />
-													Voir sur carte
-													<ExternalLink className="h-3 w-3 ml-1" />
-												</a>
-											</Button>
+													<ImageIcon className="h-3 w-3 mr-1" />
+													Photo
+												</Button>
+
+												<Button
+													variant="outline"
+													size="sm"
+													className="flex-1 sm:flex-initial shrink-0 bg-transparent"
+													asChild
+												>
+													<a
+														href={mapsUrl}
+														target="_blank"
+														rel="noopener noreferrer"
+													>
+														<MapPin className="h-3 w-3 mr-1" />
+														Carte
+														<ExternalLink className="h-3 w-3 ml-1" />
+													</a>
+												</Button>
+											</div>
 										</div>
 									</Card>
 								)
@@ -344,6 +380,27 @@ export function FilteredClocksList({
 					</ScrollArea>
 				</Card>
 			)}
+
+			{/* Photo Dialog */}
+			<Dialog
+				open={photoDialog.open}
+				onOpenChange={(open) => setPhotoDialog({ ...photoDialog, open })}
+			>
+				<DialogContent className="max-w-2xl">
+					<DialogHeader>
+						<DialogTitle>Photo de Pointage - {photoDialog.name}</DialogTitle>
+					</DialogHeader>
+					<div className="relative aspect-video w-full overflow-hidden rounded-lg bg-muted">
+						<Image
+							src={photoDialog.photo || "/placeholder.svg"}
+							alt={`Photo de ${photoDialog.name}`}
+							className="h-full w-full object-contain"
+							width={640}
+							height={480}
+						/>
+					</div>
+				</DialogContent>
+			</Dialog>
 		</div>
 	)
 }

@@ -2,7 +2,6 @@
 
 import Link from "next/link"
 
-import { Logo } from "@/components/shared/Logo"
 import { Button } from "@/components/ui/button"
 import { ArrowLeft, Home } from "lucide-react"
 
@@ -14,7 +13,6 @@ export default function NotFound() {
 	return (
 		<div className="flex h-screen w-full items-center justify-center bg-background">
 			<div className="flex max-w-[500px] flex-col items-center justify-center gap-8 text-center p-4">
-				<Logo />
 				<div className="space-y-4">
 					<h1 className="text-4xl font-bold">404</h1>
 					<h2 className="text-2xl font-semibold tracking-tight">

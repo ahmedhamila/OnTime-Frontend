@@ -26,7 +26,10 @@ export function CameraStep({ type, onCapture, onBack }: CameraStepProps) {
 
 	const capturePhoto = () => {
 		if (webcamRef.current) {
-			const imageSrc = webcamRef.current.getScreenshot()
+			const imageSrc = webcamRef.current.getScreenshot({
+				width: 1280,
+				height: 720
+			})
 			if (imageSrc) {
 				setPhoto(imageSrc)
 			}
@@ -87,7 +90,10 @@ export function CameraStep({ type, onCapture, onBack }: CameraStepProps) {
 							ref={webcamRef}
 							audio={false}
 							screenshotFormat="image/jpeg"
+							screenshotQuality={1}
 							videoConstraints={{
+								width: 1280,
+								height: 720,
 								facingMode: "user"
 							}}
 							onUserMediaError={handleUserMediaError}

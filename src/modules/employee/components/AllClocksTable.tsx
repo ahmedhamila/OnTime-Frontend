@@ -184,8 +184,8 @@ export function AllClocksTable({ clocks }: AllClocksTableProps) {
 							src={photoDialog.photo || "/placeholder.svg"}
 							alt={`Photo de ${photoDialog.name}`}
 							className="h-full w-full object-contain"
-							width={75}
-							height={75}
+							width={640}
+							height={480}
 						/>
 					</div>
 				</DialogContent>
