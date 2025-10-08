@@ -84,6 +84,10 @@ function EmployeesPage() {
 			header: "Téléphone"
 		},
 		{
+			accessorKey: "monthlyScore",
+			header: "Score Mensuel"
+		},
+		{
 			accessorKey: "pinCode",
 			header: "Code PIN",
 			cell: ({ row }) => {

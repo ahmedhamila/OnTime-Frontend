@@ -20,6 +20,7 @@ import {
 	ImageIcon,
 	MapPin,
 	Phone,
+	Star,
 	UserCheck
 } from "lucide-react"
 import { toast } from "sonner"
@@ -123,6 +124,12 @@ export function CurrentlyActiveEmployees({
 												<UserCheck className="h-3 w-3 text-green-600 shrink-0" />
 												<span className="text-green-600 font-medium">
 													{duration}
+												</span>
+											</div>
+											<div className="flex items-center gap-1">
+												<Star className="h-3 w-3 text-yellow-500 shrink-0" />
+												<span className="font-medium">
+													Score: {employee.monthlyScore}
 												</span>
 											</div>
 											<div className="flex items-center gap-1">

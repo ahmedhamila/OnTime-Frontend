@@ -36,11 +36,15 @@ import {
 	ChevronLeft,
 	ChevronRight,
 	ClockIcon,
+	Download,
 	ExternalLink,
 	Filter,
 	ImageIcon,
-	MapPin
+	MapPin,
+	Star
 } from "lucide-react"
+
+import { exportClocksToExcel } from "../utils/export"
 
 interface FilteredClocksListProps {
 	clocks: Clock[]
@@ -149,7 +153,16 @@ export function FilteredClocksList({
 			uniqueEmployees
 		}
 	}, [filteredClocks])
-
+	const handleExport = () => {
+		const dateStr = format(selectedDate, "dd-MM-yyyy", { locale: fr })
+		const employeeName =
+			selectedEmployeeId === "all"
+				? "tous"
+				: employees?.find((e) => e.id === Number(selectedEmployeeId))
+						?.firstName || "employe"
+		const filename = `pointages_${dateStr}_${employeeName}`
+		exportClocksToExcel(sortedClocks, filename)
+	}
 	return (
 		<div className="space-y-4">
 			{/* Filters */}
@@ -235,6 +248,16 @@ export function FilteredClocksList({
 								))}
 							</SelectContent>
 						</Select>
+						<Button
+							variant="default"
+							size="sm"
+							onClick={handleExport}
+							disabled={sortedClocks.length === 0}
+							className="shrink-0"
+						>
+							<Download className="h-4 w-4 mr-2" />
+							Exporter
+						</Button>
 					</div>
 				</div>
 
@@ -319,6 +342,10 @@ export function FilteredClocksList({
 														className="shrink-0"
 													>
 														{clock.clockType === "in" ? "Entrée" : "Sortie"}
+													</Badge>
+													<Badge variant="outline" className="shrink-0 gap-1">
+														<Star className="h-3 w-3 text-yellow-500" />
+														{clock.employee.monthlyScore}
 													</Badge>
 												</div>
 

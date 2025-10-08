@@ -4,4 +4,5 @@ export interface Employee {
 	lastName: string
 	phoneNumber: string
 	pinCode: string
+	monthlyScore: number
 }

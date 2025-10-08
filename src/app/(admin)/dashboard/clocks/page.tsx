@@ -2,6 +2,7 @@
 
 import { useMemo } from "react"
 
+import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 import { Skeleton } from "@/components/ui/skeleton"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
@@ -11,7 +12,17 @@ import { FilteredClocksList } from "@/modules/employee/components/FilteredClocks
 import { useClocks } from "@/modules/employee/hooks/useClocks"
 import { useEmployees } from "@/modules/employee/hooks/useEmployees"
 import type { Clock } from "@/modules/employee/types/clock"
-import { ClockIcon, Filter, UserCheck, Users, UserX } from "lucide-react"
+import { exportMonthlyClocks } from "@/modules/employee/utils/export"
+import { format } from "date-fns"
+import { fr } from "date-fns/locale"
+import {
+	ClockIcon,
+	Download,
+	Filter,
+	UserCheck,
+	Users,
+	UserX
+} from "lucide-react"
 
 function AdminClocksPage() {
 	const {
@@ -73,7 +84,31 @@ function AdminClocksPage() {
 			.filter(({ lastClock }) => lastClock.clockType === "in")
 			.map(({ employee, lastClock }) => ({ employee, lastClock }))
 	}, [todayClocks, employees])
+	const currentMonthClocks = useMemo(() => {
+		if (!clocks) return []
+		const now = new Date()
+		const monthStart = new Date(now.getFullYear(), now.getMonth(), 1)
+		const monthEnd = new Date(
+			now.getFullYear(),
+			now.getMonth() + 1,
+			0,
+			23,
+			59,
+			59,
+			999
+		)
 
+		return clocks.filter((clock) => {
+			const clockDate = new Date(clock.timestamp)
+			return clockDate >= monthStart && clockDate <= monthEnd
+		})
+	}, [clocks])
+
+	const handleMonthlyExport = () => {
+		const monthName = format(new Date(), "MMMM-yyyy", { locale: fr })
+		const filename = `pointages_${monthName}`
+		exportMonthlyClocks(currentMonthClocks, new Date())
+	}
 	// Statistics
 	const stats = useMemo(() => {
 		const totalClocks = todayClocks.length
@@ -189,7 +224,12 @@ function AdminClocksPage() {
 					</div>
 				</Card>
 			</div>
-
+			<div className="flex justify-end">
+				<Button variant="outline" className="h-8" onClick={handleMonthlyExport}>
+					<Download className="h-4 w-4 mr-2" />
+					Exporter le mois ({format(new Date(), "MMMM yyyy", { locale: fr })})
+				</Button>
+			</div>
 			{/* Main Content Tabs */}
 			<Tabs defaultValue="filtered" className="space-y-4">
 				<TabsList className="w-full bg-background border-b rounded-none h-12 justify-start gap-2">
