@@ -6,16 +6,22 @@ import Image from "next/image"
 
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
-import { ArrowLeft, Camera, RotateCcw } from "lucide-react"
+import { ArrowLeft, Camera, Loader2, RotateCcw } from "lucide-react"
 import { toast } from "sonner"
 
 interface CameraStepProps {
 	type: "in" | "out"
 	onCapture: (photo: string) => void
 	onBack: () => void
+	isSubmitting?: boolean
 }
 
-export function CameraStep({ type, onCapture, onBack }: CameraStepProps) {
+export function CameraStep({
+	type,
+	onCapture,
+	onBack,
+	isSubmitting = false
+}: CameraStepProps) {
 	const [photo, setPhoto] = useState<string | null>(null)
 	const [cameraStarted, setCameraStarted] = useState(false)
 	const webcamRef = useRef<Webcam>(null)
@@ -176,14 +182,23 @@ export function CameraStep({ type, onCapture, onBack }: CameraStepProps) {
 									: "border-red-500 bg-red-500 text-white hover:bg-red-600"
 							}`}
 							onClick={confirmPhoto}
+							disabled={isSubmitting}
 						>
-							Confirmer la photo
+							{isSubmitting ? (
+								<>
+									<Loader2 className="w-5 h-5 mr-2 animate-spin" />
+									Envoi en cours...
+								</>
+							) : (
+								"Confirmer la photo"
+							)}
 						</Button>
 						<Button
 							variant="outline"
 							size="lg"
 							className="w-full h-14 border-2 bg-transparent"
 							onClick={retakePhoto}
+							disabled={isSubmitting}
 						>
 							<RotateCcw className="w-5 h-5 mr-2" />
 							Reprendre la photo

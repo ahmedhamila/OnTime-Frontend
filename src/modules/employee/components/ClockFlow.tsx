@@ -129,6 +129,7 @@ export function ClockFlow({ type }: ClockFlowProps) {
 							type={type}
 							onCapture={handlePhotoCapture}
 							onBack={() => setCurrentStep(3)}
+							isSubmitting={createClockMutation.isPending}
 						/>
 					)}
 					{currentStep === 5 && employee && (
