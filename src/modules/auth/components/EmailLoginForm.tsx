@@ -5,12 +5,13 @@ import Link from "next/link"
 
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { Eye, EyeOff } from "lucide-react"
+import { Eye, EyeOff, Loader2 } from "lucide-react"
 
 import { useEmailLoginForm } from "../hooks/useEmailLoginForm"
 
 export function EmailLoginForm() {
-	const { register, handleSubmit, errors, onSubmit } = useEmailLoginForm()
+	const { register, handleSubmit, errors, onSubmit, loginMutation } =
+		useEmailLoginForm()
 	const [showPassword, setShowPassword] = useState(false)
 	return (
 		<div className="flex flex-col w-full ">
@@ -46,7 +47,6 @@ export function EmailLoginForm() {
 						<label htmlFor="password" className="text-sm">
 							Mot de passe
 						</label>
-						
 					</div>
 					<div className="relative">
 						<Input
@@ -77,8 +77,16 @@ export function EmailLoginForm() {
 				<Button
 					type="submit"
 					className="h-12 bg-tertiary hover:bg-tertiary/90 dark:text-white"
+					disabled={loginMutation.isPending}
 				>
-					Se Connecter
+					{loginMutation.isPending ? (
+						<>
+							<Loader2 className="w-5 h-5 mr-2 animate-spin" />
+							Connexion en cours...
+						</>
+					) : (
+						"Se Connecter"
+					)}
 				</Button>
 			</form>
 		</div>

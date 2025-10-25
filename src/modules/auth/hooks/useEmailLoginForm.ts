@@ -29,6 +29,7 @@ export const useEmailLoginForm = () => {
 		register,
 		handleSubmit,
 		errors,
-		onSubmit
+		onSubmit,
+		loginMutation
 	}
 }
