@@ -67,6 +67,39 @@ export function FilteredClocksList({
 		name: ""
 	})
 
+	// Calculate hours worked for a clock-out entry
+	const calculateHoursWorked = (clockOut: Clock): number | null => {
+		if (clockOut.clockType !== "out") return null
+
+		// Get the day boundaries
+		const clockOutDate = new Date(clockOut.timestamp)
+		const dayStart = new Date(clockOutDate)
+		dayStart.setHours(0, 0, 0, 0)
+
+		const dayEnd = new Date(clockOutDate)
+		dayEnd.setHours(23, 59, 59, 999)
+
+		// Find the single clock-in for this employee on this day
+		const clockIn = clocks.find((c) => {
+			const clockDate = new Date(c.timestamp)
+			return (
+				c.employee.id === clockOut.employee.id &&
+				c.clockType === "in" &&
+				clockDate >= dayStart &&
+				clockDate <= dayEnd
+			)
+		})
+
+		if (!clockIn) return null
+
+		// Calculate hours difference
+		const clockInTime = new Date(clockIn.timestamp).getTime()
+		const clockOutTime = clockOutDate.getTime()
+		const diffMs = clockOutTime - clockInTime
+		const diffHours = diffMs / (1000 * 60 * 60)
+
+		return Math.round(diffHours * 10) / 10 // Round to 1 decimal place
+	}
 	// Filter clocks by selected date
 	const filteredClocks = useMemo(() => {
 		if (!clocks) return []
@@ -347,6 +380,20 @@ export function FilteredClocksList({
 														<Star className="h-3 w-3 text-yellow-500" />
 														{clock.employee.monthlyScore}
 													</Badge>
+
+													{clock.clockType === "out" &&
+														(() => {
+															const hours = calculateHoursWorked(clock)
+															return hours !== null ? (
+																<Badge
+																	variant="outline"
+																	className="shrink-0 gap-1 bg-blue-50 text-blue-700 border-blue-200"
+																>
+																	<ClockIcon className="h-3 w-3" />
+																	{hours}h
+																</Badge>
+															) : null
+														})()}
 												</div>
 
 												<div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 text-sm text-muted-foreground">
